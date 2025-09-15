@@ -1,0 +1,1 @@
+savedcmd_/root/rpi_project/kernel_space/irs_90/modules.order := {   echo /root/rpi_project/kernel_space/irs_90/irs_90a_driver.o;   echo /root/rpi_project/kernel_space/irs_90/irs_90a_hal.o; :; } > /root/rpi_project/kernel_space/irs_90/modules.order

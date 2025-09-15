@@ -1,0 +1,1 @@
+savedcmd_/root/rpi_project/kernel_space/irs_90/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /root/rpi_project/kernel_space/irs_90/Module.symvers -T /root/rpi_project/kernel_space/irs_90/modules.order -i Module.symvers -e 

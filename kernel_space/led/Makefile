@@ -1,8 +1,7 @@
 # Makefile for LED kernel module
 
 # LED 驅動模組名稱
-obj-m := led_driver.o
-led_deiver-objs := led_hal.o
+obj-m := led_driver.o led_hal.o
 
 EXTRA_CFLAGS += -I$(PWD)/../../include
 

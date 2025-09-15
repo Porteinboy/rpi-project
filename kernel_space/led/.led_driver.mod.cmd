@@ -1,0 +1,1 @@
+savedcmd_/root/rpi_project/kernel_space/led/led_driver.mod := printf '%s\n'   led_driver.o | awk '!x[$$0]++ { print("/root/rpi_project/kernel_space/led/"$$0) }' > /root/rpi_project/kernel_space/led/led_driver.mod

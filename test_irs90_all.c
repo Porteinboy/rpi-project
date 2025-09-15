@@ -7,28 +7,30 @@
 #include <stdlib.h>
 
 int main() {
-    // 修正：改為讀取三感測器設備
-    int fd = open("/dev/irs90_all", O_RDONLY);
-    // printf("fd = %d\n", fd);
-    if(fd < 0){
-        perror("open /dev/irs90_all");
-        return -1;
-    }
-    
     printf("IRS-90 Triple Sensor Test Started\n");
     printf("Format: A B C (0=No Object, 1=Object Detected)\n");
     printf("Press Ctrl+C to exit\n\n");
     
     while (1) {
         
-	// 重設檔案位置到開頭
-	 lseek(fd, 0, SEEK_SET);
+    	// 讀取三感測器設備
+    	int fd = open("/dev/irs90_all", O_RDONLY);
+    	// printf("fd = %d\n", fd);
+    	if(fd < 0){
+            perror("open /dev/irs90_all");
+	    usleep(500000);
+	    continue;
+        }
 	    
 	char buf[20];  // 修正：改為字符緩衝區，容納 "000\n" 格式
         memset(buf, 0, sizeof(buf));
         
         int ret = read(fd, buf, sizeof(buf)-1);
         printf("ret = %d\n", ret);
+	
+	// 立刻關閉檔案
+	close(fd);
+	
 	if (ret > 0) {
             // 移除換行符
             if (buf[ret-1] == '\n') {
@@ -80,6 +82,5 @@ int main() {
         usleep(500000);  // 0.5 秒間隔
     }
     
-    close(fd);
     return 0;
 }
