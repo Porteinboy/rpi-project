@@ -1024,4 +1024,3 @@ $(deps_/root/rpi_project/kernel_space/irs_90/irs_90a_hal.o):
 #SYMVER irs_90_cleanup 0xfe23962e
 #SYMVER irs_90_cleanup_all 0x6687a919
 #SYMVER irs_90_get_gpio_pin 0xd2d3fd20
-#SYMVER read_gpio 0x30aff77f

@@ -1,7 +1,0 @@
-0x406bf080	irs_90_init	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0x1e821c9f	irs_90_read	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0x6293f8dd	irs_90_read_all	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0xfe23962e	irs_90_cleanup	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0x6687a919	irs_90_cleanup_all	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0xd2d3fd20	irs_90_get_gpio_pin	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	
-0x30aff77f	read_gpio	/root/rpi_project/kernel_space/irs_90/irs_90a_hal	EXPORT_SYMBOL	

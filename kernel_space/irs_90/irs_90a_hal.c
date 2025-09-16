@@ -16,7 +16,7 @@ static struct {
     unsigned int level_reg;
     const char* name;
 } sensor_config[IRS_90_MAX] = {
-    {IRS_90A, GPFSEL1, GPIO16_BIT_SHIFT, GPLEV0, "IRS_90A"}, // 使用 GPFSEL1 (0x04)
+    {IRS_90A, GPFSEL1, GPIO12_BIT_SHIFT, GPLEV0, "IRS_90A"}, // 使用 GPFSEL1 (0x04)
     {IRS_90B, GPFSEL2, GPIO20_BIT_SHIFT, GPLEV0, "IRS_90B"}, // 使用 GPFSEL2 (0x08)
     {IRS_90C, GPFSEL2, GPIO21_BIT_SHIFT, GPLEV0, "IRS_90C"}, // 使用 GPFSEL2 (0x08)
 };
@@ -174,14 +174,6 @@ int irs_90_get_gpio_pin(irs_90_sensor_t sensor) {
     return sensor_config[sensor].gpio_pin;
 }
 EXPORT_SYMBOL(irs_90_get_gpio_pin);
-
-// 向後相容函數 (給你原來的 driver 使用)
-int read_gpio(void) {
-
-    // 預設讀取 IRS_90B (GPIO20)，保持向後相容
-    return irs_90_read(IRS_90B);
-}
-EXPORT_SYMBOL(read_gpio);
 
 module_init(irs_90_hal_init);
 module_exit(irs_90_hal_exit);

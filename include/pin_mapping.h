@@ -1,9 +1,9 @@
 // pin_mapping.h
 
 // IRS_90 
-#define IRS_90A             16        
-#define GPIO16_BIT_SHIFT    18            
-#define GPIO16_FSEL GPFSEL1
+#define IRS_90A             12
+#define GPIO12_BIT_SHIFT    6            
+#define GPIO12_FSEL GPFSEL1
 
 #define IRS_90B             20
 #define GPIO20_BIT_SHIFT    0
