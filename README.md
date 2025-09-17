@@ -48,9 +48,6 @@ rpi_project/
 │ └── test_uart.c
 └── README.md
 
-yaml
-複製程式碼
-
 ---
 
 ## ⚙️ Features
@@ -81,26 +78,18 @@ make
 The .ko files will be generated in the project folder.
 
 2. Build User Applications
-bash
-複製程式碼
 cd user_space
 make
 3. Run Test Programs
-bash
-複製程式碼
 cd user_space/sensor
 sudo ./test_irs90_all
 🚀 Auto-Load Modules at Boot
 We use a systemd service to run device_load.sh automatically when Raspberry Pi boots.
 
 Create Service File
-bash
-複製程式碼
 sudo nano /etc/systemd/system/rpi_modules.service
 Paste the following:
 
-ini
-複製程式碼
 [Unit]
 Description=Load custom IRS-90 and LED modules at boot
 After=multi-user.target
@@ -112,16 +101,13 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
+
 Enable & Start Service
-bash
-複製程式碼
 sudo systemctl daemon-reload
 sudo systemctl enable rpi_modules.service
 sudo systemctl start rpi_modules.service
-Check status:
 
-bash
-複製程式碼
+Check status:
 systemctl status rpi_modules.service
 📝 Notes
 Tested on Raspberry Pi 4 (BCM2711)
