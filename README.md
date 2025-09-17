@@ -7,6 +7,7 @@ It includes custom **HAL (Hardware Abstraction Layer) modules**, **device driver
 
 ## 📂 Project Structure
 
+```
 rpi_project/
 ├── elf/ # (Reserved for compiled ELF outputs or debug)
 ├── kernel_modules/ # Pre-built kernel modules (.ko)
@@ -47,6 +48,7 @@ rpi_project/
 │ ├── test_uart_8_1.c
 │ └── test_uart.c
 └── README.md
+```
 
 ---
 
