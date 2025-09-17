@@ -35,5 +35,9 @@
 #define GPIO_PUP_PDN_CNTRL_REG2 0xec
 #define GPIO_PUP_PDN_CNTRL_REG3 0xf0
 
+#define UART0_BASE 0xFE201000   // PL011 UART
+#define UART0_DR   0x00
+#define UART0_FR   0x18
+
 #endif // #define def __GPIO_ADDRESS__
 
