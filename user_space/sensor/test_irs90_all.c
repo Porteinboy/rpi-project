@@ -22,7 +22,7 @@ int main() {
 	    continue;
         }
 	    
-	char buf[20];  // 修正：改為字符緩衝區，容納 "000\n" 格式
+	char buf[20];  // 改為字符緩衝區，容納 "000\n" 格式
         memset(buf, 0, sizeof(buf));
         
         int ret = read(fd, buf, sizeof(buf)-1);
@@ -47,21 +47,21 @@ int main() {
                 
                 // 邏輯判斷和狀態顯示
                 if (sensor_a == 0 && sensor_b == 0 && sensor_c == 0) {
-                    printf("All clear - No objects detected\n");
+                    printf("No Cars in spaces\n");
                 } else if (sensor_a == 1 && sensor_b == 1 && sensor_c == 1) {
-                    printf("All sensors triggered - Object in front\n");
+                    printf("All spaces has cars\n");
                 } else if (sensor_a == 1 && sensor_b == 0 && sensor_c == 0) {
-                    printf("Left sensor only - Object on left side\n");
+                    printf("Car is parked in space A.\n");
                 } else if (sensor_a == 0 && sensor_b == 1 && sensor_c == 0) {
-                    printf("Center sensor only - Object in center\n");
+                    printf("Car is parked in space B\n");
                 } else if (sensor_a == 0 && sensor_b == 0 && sensor_c == 1) {
-                    printf("Right sensor only - Object on right side\n");
+                    printf("Car is parked in space C\n");
                 } else if (sensor_a == 1 && sensor_b == 1 && sensor_c == 0) {
-                    printf("Left + Center - Object on left-center\n");
+                    printf("Cars are parked in spaces A and B\n");
                 } else if (sensor_a == 0 && sensor_b == 1 && sensor_c == 1) {
-                    printf("Center + Right - Object on center-right\n");
+                    printf("Cars are parked in spaces B and C\n");
                 } else if (sensor_a == 1 && sensor_b == 0 && sensor_c == 1) {
-                    printf("Left + Right - Objects on both sides\n");
+                    printf("Cars are parked in spaces A and C\n");
                 } else {
                     printf("Unknown pattern\n");
                 }

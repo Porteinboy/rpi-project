@@ -1,1 +1,0 @@
-savedcmd_/root/rpi_project/kernel_space/led/modules.order := {   echo /root/rpi_project/kernel_space/led/led_driver.o;   echo /root/rpi_project/kernel_space/led/led_hal.o; :; } > /root/rpi_project/kernel_space/led/modules.order

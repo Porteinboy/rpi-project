@@ -1,4 +1,4 @@
-// irs90a_hal.c
+// irs_90_hal.c
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/io.h>

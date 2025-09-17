@@ -1,1 +1,0 @@
-savedcmd_/root/rpi_project/kernel_space/irs_90/irs_90a_hal.mod := printf '%s\n'   irs_90a_hal.o | awk '!x[$$0]++ { print("/root/rpi_project/kernel_space/irs_90/"$$0) }' > /root/rpi_project/kernel_space/irs_90/irs_90a_hal.mod

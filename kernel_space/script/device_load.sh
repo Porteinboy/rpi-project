@@ -6,19 +6,19 @@
 
 
 # 1.定義模組路徑
-IRS_MODULE_DIR="/root/rpi_project/kernel_space/irs_90"
-LED_MODULE_DIR="/root/rpi_project/kernel_space/led"
+MODULE_DIR="/root/rpi_project/kernel_modules"
 
 # IRS_90 模組
-IRS_HAL_MODULE="$IRS_MODULE_DIR/irs_90a_hal.ko"
-IRS_DRIVER_MODULE="$IRS_MODULE_DIR/irs_90a_driver.ko"
+IRS_HAL_MODULE="$MODULE_DIR/irs_90_hal.ko"
+IRS_DRIVER_MODULE="$MODULE_DIR/irs_90_driver.ko"
 
 # LED 模組
-LED_DRIVER_MODULE="$LED_MODULE_DIR/led_driver.ko"
+LED_HAL_MODULE="$MODULE_DIR/led_hal.ko"
+LED_DRIVER_MODULE="$MODULE_DIR/led_driver.ko"
 
-# 2. 載入 HAL 模組
-echo ">>> Loading IRS_90a Device HAL..."
-if ! (lsmod | grep -q irs_90a_hal); then
+# 2. 載入 IRS_90 HAL 模組
+echo ">>> Loading IRS_90 Device HAL..."
+if ! (lsmod | grep -q irs_90_hal); then
 	insmod "$IRS_HAL_MODULE"			# 載入 hal.ko 模組
 	echo "HAL loaded"
 else 
@@ -27,9 +27,9 @@ fi
 
 
 
-# 3. 載入 Device Driver 模組
-echo ">>> Loading IRS_90a Device Driver..."
-if ! (lsmod | grep -q irs_90a_driver); then
+# 3. 載入 IRS_90 Device Driver 模組
+echo ">>> Loading IRS_90 Device Driver..."
+if ! (lsmod | grep -q irs_90_driver); then
 	insmod "$IRS_DRIVER_MODULE"			# 載入 driver.ko 模組
 	echo "Device Driver loaded"
 else
@@ -39,8 +39,8 @@ fi
 # 4. 載入 LED HAL 模組
 echo ">>> Loading LED HAL..."
 if ! (lsmod | grep -q led_hal); then
-    if [ -f "$LED_MODULE_DIR/led_hal.ko" ]; then
-        insmod "$LED_MODULE_DIR/led_hal.ko"
+    if [ -f "$LED_HAL_MODULE" ]; then
+        insmod "$LED_HAL_MODULE"
         if [ $? -eq 0 ]; then
             echo "LED HAL loaded successfully"
         else
@@ -69,17 +69,3 @@ if ! (lsmod | grep -q led_driver); then
 else
 	echo "LED Device Driver already loaded"
 fi
-
-# 5. 檢查所有模組是否有失敗的
-if ! (lsmod | grep -q irs_90a_hal); then 
-	echo "IRS_90a HAL load failed!Please check out"
-fi
-if ! (lsmod | grep -q irs_90a_driver); then
-	echo "IRS_90a Device Driver load failed!Please check out"
-fi
-if ! (lsmod | grep -q led_driver); then
-	echo "LED Device Driver load failed!Please check out"
-fi
-
-
-

@@ -1,4 +1,4 @@
-// irs-90a_driver.c
+// irs_90_driver.c
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/uaccess.h>

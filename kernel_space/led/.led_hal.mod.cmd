@@ -1,1 +1,0 @@
-savedcmd_/root/rpi_project/kernel_space/led/led_hal.mod := printf '%s\n'   led_hal.o | awk '!x[$$0]++ { print("/root/rpi_project/kernel_space/led/"$$0) }' > /root/rpi_project/kernel_space/led/led_hal.mod

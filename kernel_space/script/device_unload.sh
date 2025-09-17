@@ -22,8 +22,8 @@ else
 	echo "Warning! LED HAL was not loaded"
 fi
 # 卸載 IRS_90a Device Driver 模組
-echo ">>> Unloading IRS_90a Device Driver..."
-if lsmod | grep -q irs_90a_driver; then
+echo ">>> Unloading IRS_90 Device Driver..."
+if lsmod | grep -q irs_90_driver; then
 	rmmod irs_90a_driver
 	echo "IRS_90a Device Driver Unload Successful"
 else 
@@ -31,8 +31,8 @@ else
 fi
 
 # 卸載 IRS_90a HAL 模組 
-echo ">>> Unloading IRS_90a HAL..."
-if lsmod | grep -q irs_90a_hal; then
+echo ">>> Unloading IRS_90 HAL..."
+if lsmod | grep -q irs_90_hal; then
 	rmmod irs_90a_hal
 	echo "IRS_90a HAL Unload Successful"
 else
