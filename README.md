@@ -74,20 +74,21 @@ rpi_project/
 cd kernel_space/irs_90
 make
 cd ../led
-make
+make```
 The .ko files will be generated in the project folder.
 
-2. Build User Applications
-cd user_space
-make
-3. Run Test Programs
-cd user_space/sensor
-sudo ./test_irs90_all
+### 2. Build User Applications
+```cd user_space
+make```
+
+### 3. Run Test Programs
+```cd user_space/sensor
+sudo ./test_irs90_all```
 🚀 Auto-Load Modules at Boot
 We use a systemd service to run device_load.sh automatically when Raspberry Pi boots.
 
 Create Service File
-sudo nano /etc/systemd/system/rpi_modules.service
+```sudo nano /etc/systemd/system/rpi_modules.service
 Paste the following:
 
 [Unit]
@@ -100,23 +101,28 @@ ExecStart=/root/rpi_project/kernel_space/script/device_load.sh
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target```
 
 Enable & Start Service
+```
 sudo systemctl daemon-reload
 sudo systemctl enable rpi_modules.service
 sudo systemctl start rpi_modules.service
+```
 
 Check status:
+```
 systemctl status rpi_modules.service
-📝 Notes
+```
+
+## 📝 Notes
 Tested on Raspberry Pi 4 (BCM2711)
 
 Kernel modules must be rebuilt if kernel version changes
 
 Requires make, gcc, and kernel headers installed
 
-📌 Future Work
+## 📌 Future Work
 Add more sensor drivers (e.g., ultrasonic, servo control)
 
 Expand MQTT integration for IoT applications
