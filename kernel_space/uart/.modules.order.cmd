@@ -1,1 +1,0 @@
-savedcmd_/root/rpi_project/kernel_space/uart/modules.order := {   echo /root/rpi_project/kernel_space/uart/uart_hal.o;   echo /root/rpi_project/kernel_space/uart/uart_driver.o; :; } > /root/rpi_project/kernel_space/uart/modules.order

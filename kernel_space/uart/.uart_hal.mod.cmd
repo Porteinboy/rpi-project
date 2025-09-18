@@ -1,1 +1,0 @@
-savedcmd_/root/rpi_project/kernel_space/uart/uart_hal.mod := printf '%s\n'   uart_hal.o | awk '!x[$$0]++ { print("/root/rpi_project/kernel_space/uart/"$$0) }' > /root/rpi_project/kernel_space/uart/uart_hal.mod

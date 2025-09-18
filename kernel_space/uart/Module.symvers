@@ -1,4 +1,0 @@
-0xb4ef4356	uart_hal_init	/root/rpi_project/kernel_space/uart/uart_hal	EXPORT_SYMBOL	
-0x695cb4d7	uart_hal_exit	/root/rpi_project/kernel_space/uart/uart_hal	EXPORT_SYMBOL	
-0x94588010	uart_hal_write_char	/root/rpi_project/kernel_space/uart/uart_hal	EXPORT_SYMBOL	
-0x886a41d2	uart_hal_read_char	/root/rpi_project/kernel_space/uart/uart_hal	EXPORT_SYMBOL	
