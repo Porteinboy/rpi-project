@@ -3,6 +3,7 @@
  *  author: jiunnder2000@yahoo.com.tw
  */
 
+// uart.c
 #include <linux/version.h>
 #include <linux/module.h>
 #include <linux/kernel.h> /* printk() */
@@ -89,7 +90,7 @@ ssize_t uart_read (struct file * filp, char *buf, size_t count, loff_t *t)
     if ( (status & UART_FR_RXFF) )
     {
 	    kbuf= readb(uart_DR[dev_minor]);
-	    printk(KERN_ALERT " uart_read[%d](): status:%x, kbuf: %2x\n", dev_minor, status, kbuf);
+	    // printk(KERN_ALERT " uart_read[%d](): status:%x, kbuf: %2x\n", dev_minor, status, kbuf);
  	    rcount = copy_to_user(buf, &kbuf, 1);
        
 	    return 1;
@@ -115,12 +116,12 @@ ssize_t uart_write (struct file * filp, const char *buf, size_t count, loff_t * 
       status = readl(uart_FR[dev_minor]);
       // To do: Wait for until transmit holding register empty
       if( status & UART_FR_TXFE ) {
-        printk(KERN_ALERT "uart_write[%d](): status:%x, kbuf[0]:%x\n", dev_minor, status, kbuf[0]);
+        // printk(KERN_ALERT "uart_write[%d](): status:%x, kbuf[0]:%x\n", dev_minor, status, kbuf[0]);
 	// To do: Write to UART transmit holding register
         writeb(*(kbuf+i), uart_DR[dev_minor]);
 	
 	while ( readl(uart_FR[dev_minor]) & UART_FR_BUSY);
-	//  printk(KERN_ALERT "TX complete\n");
+	// printk(KERN_ALERT "TX complete\n");
 	 
 	i++;
       }
