@@ -73,7 +73,7 @@ fi
 
 #6. 載入 UART Driver 模組
 echo ">>> Loading UART Driver... "
-if ! (lsmod | grep -q uart); then
+if ! (lsmod | grep -q '^uart '); then
 	if [ -f "$UART_MODULE" ]; then
 		insmod "$UART_MODULE"
 		if [ $? -eq 0 ]; then

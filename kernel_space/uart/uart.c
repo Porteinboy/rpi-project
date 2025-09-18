@@ -76,7 +76,7 @@ static int uart_close(struct inode *inode, struct file *file)
     return 0;
 }
 
-ssize_t uart_read (struct file * filp, char *buf, size_t count, loff_t *t)
+static ssize_t uart_read (struct file * filp, char *buf, size_t count, loff_t *t)
 {
     int dev_minor = iminor(filp->f_path.dentry->d_inode);
     int rcount;
@@ -99,7 +99,7 @@ ssize_t uart_read (struct file * filp, char *buf, size_t count, loff_t *t)
     return 0;
 }
 
-ssize_t uart_write (struct file * filp, const char *buf, size_t count, loff_t * t)
+static ssize_t uart_write (struct file * filp, const char *buf, size_t count, loff_t * t)
 {
     int dev_minor = iminor(filp->f_path.dentry->d_inode);
     int i=0;
@@ -131,14 +131,14 @@ ssize_t uart_write (struct file * filp, const char *buf, size_t count, loff_t * 
 }
 
 
-struct file_operations uart_fops = {
+static struct file_operations uart_fops = {
     .read=uart_read,
     .write=uart_write,
     .open=uart_open,
     .release = uart_close
 };
 
-int init_module(void)
+static int __init uart_init(void)
 {
     int i;
     
@@ -254,7 +254,7 @@ fail_register_chrdev:
     return -EIO;
 }
 
-void cleanup_module(void)
+static void __exit uart_exit(void)
 {
     int i;
 
@@ -275,5 +275,8 @@ void cleanup_module(void)
     for(i=0; i<UARTS_NUM; i++)
         release_mem_region(uart_port_base[i], UART_REGLEN);
 }
+
+module_init(uart_init);
+module_exit(uart_exit);
 
 MODULE_LICENSE("GPL");
