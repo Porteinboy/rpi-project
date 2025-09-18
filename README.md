@@ -9,44 +9,20 @@ It includes custom **HAL (Hardware Abstraction Layer) modules**, **device driver
 
 ```
 rpi_project/
-├── elf/ # (Reserved for compiled ELF outputs or debug)
 ├── kernel_modules/ # Pre-built kernel modules (.ko)
-│ ├── irs_90_driver.ko
-│ ├── irs_90_hal.ko
-│ ├── led_driver.ko
-│ └── led_hal.ko
 ├── kernel_space/ # Source code for kernel space
 │ ├── include/ # Common header files
-│ │ ├── irs_90_hal.h
-│ │ ├── led_hal.h
-│ │ ├── pin_mapping.h
-│ │ └── register_map.h
 │ ├── irs_90/ # IRS-90 sensor driver
-│ │ ├── irs_90_driver.c
-│ │ ├── irs_90_hal.c
-│ │ └── Makefile
 │ ├── led/ # LED driver
-│ │ ├── led_driver.c
-│ │ ├── led_hal.c
-│ │ └── Makefile
+│ ├── uart/ # UART driver
 │ └── script/ # Load/unload scripts
-│ ├── device_load.sh
-│ └── device_unload.sh
 ├── user_space/ # User-space applications
-│ ├── Makefile
-│ ├── mqtt/
 │ │ └── simple_irs90_publisher.c
 │ ├── sensor/
-│ │ ├── Makefile
-│ │ └── test_irs90_all.c
-│ ├── sensor_led_controller # Compiled binary
+│ ├── sensor_led_controller
 │ ├── sensor_led_controller.c
 │ ├── sensor_led_controller_B.c
 │ └── uart/
-│ ├── test_uart_14_15
-│ ├── test_uart_14_15.c
-│ ├── test_uart_8_1.c
-│ └── test_uart.c
 └── README.md
 ```
 
@@ -131,10 +107,3 @@ Tested on Raspberry Pi 4 (BCM2711)
 Kernel modules must be rebuilt if kernel version changes
 
 Requires make, gcc, and kernel headers installed
-
-## 📌 Future Work
-Add more sensor drivers (e.g., ultrasonic, servo control)
-
-Expand MQTT integration for IoT applications
-
-Develop web dashboard for sensor/LED monitoring
