@@ -1,109 +1,69 @@
-# RPi4 IRS-90 & LED Control System
+# RPi Project – Sensor & UART Control System
 
-This project implements a complete **kernel-space + user-space** framework on Raspberry Pi 4 (BCM2711) to control IRS-90 line sensors and LEDs.  
-It includes custom **HAL (Hardware Abstraction Layer) modules**, **device drivers**, and **user applications**.  
+## Overview
+This project implements a Raspberry Pi 4–based embedded control system that integrates:
+- **IRS-90 infrared line-tracking sensors**
+- **LED indicator modules**
+- **UART communication**
+- **User-space applications** (MQTT publisher, test programs)
+
+The system is structured in two layers:
+1. **Kernel space drivers** (.ko modules)  
+2. **User space applications** (C programs, MQTT clients)
+
+This ensures clear separation of hardware abstraction and application logic.
 
 ---
 
-## 📂 Project Structure
-
-```
+## Directory Structure
 rpi_project/
-├── kernel_modules/ # Pre-built kernel modules (.ko)
-├── kernel_space/ # Source code for kernel space
-│ ├── include/ # Common header files
-│ ├── irs_90/ # IRS-90 sensor driver
-│ ├── led/ # LED driver
-│ ├── uart/ # UART driver
-│ └── script/ # Load/unload scripts
-├── user_space/ # User-space applications
-│ │ └── simple_irs90_publisher.c
-│ ├── sensor/
-│ ├── sensor_led_controller
-│ ├── sensor_led_controller.c
-│ ├── sensor_led_controller_B.c
-│ └── uart/
+├── bin/ # User-space executables
+├── build/ # Build artifacts and object files
+├── docs/ # Documentation (design, reports, slides)
+├── include/ # Shared header files
+├── kernel/ # Kernel-space driver sources
+├── modules/ # Compiled kernel modules (.ko)
+├── src/ # User-space source codes
 └── README.md
-```
 
 ---
 
-## ⚙️ Features
+## Build Instructions
 
-- **Kernel Space**
-  - IRS-90 HAL and driver
-  - LED HAL and driver
-  - Register-level control based on BCM2711 datasheet
-- **User Space**
-  - Sensor test applications
-  - LED + IRS-90 controller
-  - UART communication tests
-wq  - MQTT publisher for IRS-90 sensor data
-- **Automation**
-  - Scripts to load/unload kernel modules
-  - Optional `systemd` service for auto-loading on boot
-
----
-
-## 🔨 Build & Install
-
-### 1. Build Kernel Modules
-```
-bash
-cd kernel_space/irs_90
+### Kernel Modules
+```bash
+cd kernel/irs_90
 make
 cd ../led
 make
-```
-The .ko files will be generated in the project folder.
-
-### 2. Build User Applications
-```
-cd user_space
+cd ../uart
 make
-```
+# install .ko modules
+sudo insmod ../../modules/irs_90_driver.ko
+sudo insmod ../../modules/led_driver.ko
+sudo insmod ../../modules/uart.ko```
 
-### 3. Run Test Programs
-```
-cd user_space/sensor
-sudo ./test_irs90_all
-```
-🚀 Auto-Load Modules at Boot
-We use a systemd service to run device_load.sh automatically when Raspberry Pi boots.
+User-Space Applications
+```bash
+cd src/uart
+make
+cd ../mqtt
+make```
 
-Create Service File
-```
-sudo nano /etc/systemd/system/rpi_modules.service
-Paste the following:
+Binaries will be placed in bin/.
 
-[Unit]
-Description=Load custom IRS-90 and LED modules at boot
-After=multi-user.target
+Usage
 
-[Service]
-Type=oneshot
-ExecStart=/root/rpi_project/kernel_space/script/device_load.sh
-RemainAfterExit=yes
+Sensor test:
+```bash
+./bin/test_irs90_all```
 
-[Install]
-WantedBy=multi-user.target
-```
 
-Enable & Start Service
-```
-sudo systemctl daemon-reload
-sudo systemctl enable rpi_modules.service
-sudo systemctl start rpi_modules.service
-```
+UART test:
+```bash
+./bin/irs90_uart```
 
-Check status:
-```
-systemctl status rpi_modules.service
-```
 
-## 📝 Notes
-Tested on Raspberry Pi 4 (BCM2711)
-
-Kernel modules must be rebuilt if kernel version changes
-
-Requires make, gcc, and kernel headers installed
+MQTT publisher:
+```bash
+./bin/irs90_mqtt_publisher```
