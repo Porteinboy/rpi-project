@@ -1,19 +1,25 @@
-# Makefile for logic layer
+# Makefile for logic layer (sensor test programs)
 
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -O2
 EXTRA_CFLAGS += -I$(PWD)/../include
 
-TARGET = test_irs90_all
+# Project structure
+BIN_DIR = ../../bin
+TARGET = $(BIN_DIR)/test_irs90_all
 SOURCE = test_irs90_all.c
-
-# Build target
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -o $@ $(SOURCE)
 
 # Default target
 all: $(TARGET)
+
+# Build target
+$(TARGET): $(SOURCE) | $(BIN_DIR)
+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -o $@ $<
+
+# Ensure bin directory exists
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
 # Clean build files
 clean:
@@ -21,4 +27,4 @@ clean:
 
 # Run program (require sudo)
 run: $(TARGET)
-	sudo ./$(TARGET)
+	sudo $(TARGET)

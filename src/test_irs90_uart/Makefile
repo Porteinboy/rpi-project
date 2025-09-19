@@ -5,20 +5,21 @@ CC = gcc
 CFLAGS = -Wall -O2
 EXTRA_CFLAGS += -I$(PWD)/../include
 
-TARGET = sensor_led_controller
+# Paths
+BIN_DIR = ../../bin
+TARGET = $(BIN_DIR)/sensor_led_controller
 SOURCE = sensor_led_controller.c
 
-# Build target
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -o $@ $(SOURCE)
+all: $(BIN_DIR) $(TARGET)
 
-# Default target
-all: $(TARGET)
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
-# Clean build files
+$(TARGET): $(SOURCE)
+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) -o $@ $<
+
 clean:
 	rm -f $(TARGET)
 
-# Run program (require sudo)
 run: $(TARGET)
-	sudo ./$(TARGET)
+	sudo $<

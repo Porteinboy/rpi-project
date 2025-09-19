@@ -1,20 +1,36 @@
-# MQTT 通訊測試
+# MQTT 通訊測試 Makefile
 
 CC = gcc
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -O2 -I$(PWD)/../include
 LIBS = -lmosquitto
 
-# 目標檔案
-TARGET = irs90_mqtt_publisher
-SOURCE = irs90_mqtt_publisher.c mqtt_client.c
+# Project structure
+BIN_DIR = ../../bin
+OBJ_DIR = ../../build/obj
 
+TARGET = $(BIN_DIR)/irs90_mqtt_publisher
+SOURCES = irs90_mqtt_publisher.c mqtt_client.c
+OBJECTS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SOURCES))
+
+# Default target
 all: $(TARGET)
 
-$(TARGET): $(SOURCE)
+# Link .o -> executable
+$(TARGET): $(OBJECTS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-run: $(TARGET)
-	sudo ./$(TARGET)
+# Compile .c -> .o
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
+# Ensure directories exist
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
+
+# Clean build files
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJECTS)
+
+# Run program (require sudo)
+run: $(TARGET)
+	sudo $(TARGET)
