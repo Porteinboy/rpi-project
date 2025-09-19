@@ -1,7 +1,8 @@
 TARGET1=testr
 TARGET2=testw
+TARGET3=irs90_uart
 
-all: $(TARGET1) $(TARGET2) $(TARGET2)-line
+all: $(TARGET1) $(TARGET2) $(TARGET2)-line $(TARGET3)
 
 CC = gcc
 
@@ -16,5 +17,8 @@ $(TARGET2): $(TARGET2).c
 $(TARGET2)-line:$(TARGET2).c
 	$(CC) -D__LINE_BUF__ $(TARGET2).c  -o $(TARGET2)-line
 
+$(TARGET3): $(TARGET3).c
+	$(CC) $(TARGET3).c  -o $(TARGET3)
+
 clean:
-	rm -f $(TARGET1) $(TARGET2) $(TARGET2)-line
+	rm -f $(TARGET1) $(TARGET2) $(TARGET2)-line $(TARGET3)
