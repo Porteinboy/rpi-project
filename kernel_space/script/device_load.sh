@@ -4,8 +4,9 @@
 # 開機自動執行的腳本
 # 掛載: IRS_90 感測器 + LED 驅動 + UART 驅動
 
-# 1.定義模組路徑
-MODULE_DIR="/root/rpi_project/kernel_modules"
+# 取得專案根目錄
+PROJECT_ROOT="$(cd "$(dirname "$0")/../../" && pwd)"
+MODULE_DIR="$PROJECT_ROOT/modules"
 
 # IRS_90 模組
 IRS_HAL_MODULE="$MODULE_DIR/irs_90_hal.ko"
