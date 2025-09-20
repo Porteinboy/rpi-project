@@ -1,4 +1,4 @@
-# RPi Project – Parking Status Sensing and Data Transmission Subsystem
+# RPi Project – Parking Status Detection and Reporting System
 
 ## Overview
 This project implements a Raspberry Pi 4–based embedded control system that integrates:
