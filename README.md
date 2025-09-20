@@ -16,6 +16,7 @@ This ensures clear separation of hardware abstraction and application logic.
 ---
 
 ## Directory Structure
+```
 rpi_project/
 ├── bin/       # User-space executables
 ├── build/     # Build artifacts and object files
@@ -25,6 +26,7 @@ rpi_project/
 ├── modules/   # Compiled kernel modules (.ko)
 ├── src/       # User-space source codes
 └── README.md
+```
 
 ---
 
