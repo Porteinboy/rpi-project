@@ -25,7 +25,7 @@ echo ">>> Loading IRS_90 Device HAL..."
 if ! (lsmod | grep -q irs_90_hal); then
 	insmod "$IRS_HAL_MODULE"			# 載入 hal.ko 模組
 	echo "HAL loaded"
-else 
+else
 	echo "HAL already loaded"		# 若已載入 顯示訊息
 fi
 
@@ -100,4 +100,36 @@ if [ -n "$UART_MAJOR" ]; then
 	echo "/dev/uart2 and /dev/uart3 created"
 else
 	echo "Failed to find UART major number"
+fi
+
+# 8. 啟動使用者空間程式 (背景執行)
+echo ">>> Starting user-space applications..."
+
+BIN_DIR="$PROJECT_ROOT/bin"
+LOG_DIR="$PROJECT_ROOT/logs"
+
+mkdir -p "$LOG_DIR"
+
+# IRS90 → MQTT
+if [ -x "$BIN_DIR/irs90_mqtt_publisher" ]; then
+    "$BIN_DIR/irs90_mqtt_publisher" >"$LOG_DIR/irs90_mqtt_publisher.log" 2>&1 &
+    echo "irs90_mqtt_publisher started (PID=$!)"
+else
+    echo "irs90_mqtt_publisher not found"
+fi
+
+# IRS90 UART
+if [ -x "$BIN_DIR/irs90_uart" ]; then
+    "$BIN_DIR/irs90_uart" >"$LOG_DIR/irs90_uart.log" 2>&1 &
+    echo "irs90_uart started (PID=$!)"
+else
+    echo "irs90_uart not found"
+fi
+
+# Sensor → LED Controller
+if [ -x "$BIN_DIR/sensor_led_controller" ]; then
+    "$BIN_DIR/sensor_led_controller" >"$LOG_DIR/sensor_led_controller.log" 2>&1 &
+    echo "sensor_led_controller started (PID=$!)"
+else
+    echo "sensor_led_controller not found"
 fi

@@ -1,0 +1,21 @@
+===========================================
+IRS-90 Sensor LED Controller
+Function: Read sensor status and control LEDs
+===========================================
+Device initialization successful:
+  - IRS-90 sensor: /dev/irs90_all
+  - LED controller: /dev/led_all (fd=3)
+Initial state: All LEDs off
+[15:16:08] Sensor: 000 -> LED: 000
+............[15:18:28] Sensor: 111 -> LED: 111
+[15:18:29] Sensor: 000 -> LED: 000
+[15:18:29] Sensor: 100 -> LED: 100
+[15:18:30] Sensor: 000 -> LED: 000
+[15:18:30] Sensor: 010 -> LED: 010
+[15:18:30] Sensor: 000 -> LED: 000
+[15:18:30] Sensor: 001 -> LED: 001
+[15:18:31] Sensor: 000 -> LED: 000
+[15:18:31] Sensor: 011 -> LED: 011
+[15:18:31] Sensor: 111 -> LED: 111
+[15:18:32] Sensor: 000 -> LED: 000
+.............
