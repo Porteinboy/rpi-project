@@ -4,9 +4,11 @@ import board
 import neopixel
 import os
 
-# WS2812 設定
+# ------------------------------
+# WS2812 LED 設定
+# ------------------------------
 LED_COUNT = 8
-LED_PIN = board.D18
+LED_PIN = board.D18       # BCM 18 對應 PWM0
 ORDER = neopixel.GRB
 BRIGHTNESS = 0.5
 
@@ -14,7 +16,9 @@ pixels = neopixel.NeoPixel(
     LED_PIN, LED_COUNT, brightness=BRIGHTNESS, auto_write=False, pixel_order=ORDER
 )
 
+# ------------------------------
 # IRS90 sensor 裝置
+# ------------------------------
 SENSOR_DEVICE = "/dev/irs90_all"
 
 # 對應規則：A sensor 控制左側 3 顆，B sensor 中間 2 顆，C sensor 右側 3 顆
@@ -24,9 +28,14 @@ SENSOR_MAP = {
     2: range(5, 8),  # C sensor -> LED 5~7
 }
 
-COLOR_ON =  (255, 0, 0)   # 感測到物體時紅燈
-COLOR_OFF = (0,   0, 0)   # 未偵測物體時全關
+# 顏色設定
+COLOR_ON = (255, 0, 0)   # 感測到物體時紅燈
+COLOR_OFF = (0, 255, 0)  # 初始與未偵測 → 綠燈
+COLOR_EXIT = (0, 0, 0)   # Ctrl+C 結束 → 全關
 
+# ------------------------------
+# 讀取 IRS90 感測器
+# ------------------------------
 def read_sensors():
     try:
         with open(SENSOR_DEVICE, "r") as f:
@@ -39,8 +48,11 @@ def read_sensors():
         print(f"Failed to read sensor: {e}")
         return "000"
 
+# ------------------------------
+# 更新 LED
+# ------------------------------
 def update_leds(sensor_status):
-    # 初始化全部為關燈顏色（這裡改為綠色）
+    # 預設全部為未偵測 → 綠燈
     pixels.fill(COLOR_OFF)
 
     for idx, s in enumerate(sensor_status):
@@ -50,18 +62,26 @@ def update_leds(sensor_status):
 
     pixels.show()
 
+# ------------------------------
+# 主程式
+# ------------------------------
 def main():
     print("IRS90 -> WS2812 Controller started")
+    # 啟動時顯示綠燈
+    pixels.fill(COLOR_OFF)
+    pixels.show()
+
     try:
         while True:
             status = read_sensors()
             update_leds(status)
             time.sleep(0.1)
     except KeyboardInterrupt:
-        # Ctrl+C 結束時將 LED 全部設為關燈顏色（綠色）
-        pixels.fill(COLOR_OFF)
+        # Ctrl+C 結束時 LED 全關
+        pixels.fill(COLOR_EXIT)
         pixels.show()
         print("Exiting...")
 
+# ------------------------------
 if __name__ == "__main__":
     main()

@@ -155,4 +155,29 @@ Initial state: All LEDs off
 [15:59:18] Sensor: 010 -> LED: 010
 [15:59:18] Sensor: 111 -> LED: 111
 [15:59:18] Sensor: 000 -> LED: 000
-....
+.....................[16:02:49] Sensor: 001 -> LED: 001
+[16:02:49] Sensor: 111 -> LED: 111
+[16:02:50] Sensor: 011 -> LED: 011
+[16:02:50] Sensor: 000 -> LED: 000
+[16:02:51] Sensor: 001 -> LED: 001
+[16:02:51] Sensor: 111 -> LED: 111
+[16:02:51] Sensor: 100 -> LED: 100
+[16:02:51] Sensor: 000 -> LED: 000
+[16:02:52] Sensor: 100 -> LED: 100
+[16:02:52] Sensor: 110 -> LED: 110
+[16:02:52] Sensor: 111 -> LED: 111
+[16:02:53] Sensor: 110 -> LED: 110
+[16:02:54] Sensor: 100 -> LED: 100
+[16:02:54] Sensor: 000 -> LED: 000
+[16:02:54] Sensor: 100 -> LED: 100
+[16:02:54] Sensor: 110 -> LED: 110
+[16:02:55] Sensor: 111 -> LED: 111
+[16:02:55] Sensor: 100 -> LED: 100
+[16:02:55] Sensor: 000 -> LED: 000
+[16:02:56] Sensor: 100 -> LED: 100
+[16:02:56] Sensor: 110 -> LED: 110
+[16:02:56] Sensor: 111 -> LED: 111
+[16:02:56] Sensor: 110 -> LED: 110
+[16:02:56] Sensor: 100 -> LED: 100
+[16:02:56] Sensor: 000 -> LED: 000
+..
