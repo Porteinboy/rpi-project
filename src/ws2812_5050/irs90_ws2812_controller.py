@@ -24,8 +24,8 @@ SENSOR_MAP = {
     2: range(5, 8),  # C sensor -> LED 5~7
 }
 
-COLOR_ON = (255, 0, 0)   # 感測到物體時紅燈
-COLOR_OFF = (0, 255, 0)  # 未偵測物體時綠燈
+COLOR_ON =  (255, 0, 0)   # 感測到物體時紅燈
+COLOR_OFF = (0,   0, 0)   # 未偵測物體時全關
 
 def read_sensors():
     try:
