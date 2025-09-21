@@ -4,10 +4,23 @@
 
 # 1. 停止背景程式
 echo ">>> Stopping background processes..."
-for prog in irs90_mqtt_publisher irs90_uart sensor_led_controller; do
-    if pgrep -x "$prog" > /dev/null; then
-        pkill -TERM -x "$prog"
-        echo "Stopped $prog"
+
+# 背景程式列表
+BG_PROGS=(
+    irs90_mqtt_publisher
+    irs90_uart
+    sensor_led_controller
+    irs90_ws2812_controller.py
+)
+
+for prog in "${BG_PROGS[@]}"; do
+    PID=$(pgrep -f "$prog")
+    if [ -n "$PID" ]; then
+        echo "Stopping $prog (PID=$PID)..."
+        # 用 SIGINT 讓程式安全結束
+        kill -2 $PID
+        # 等待程式退出
+        sleep 1
     else
         echo "$prog not running"
     fi

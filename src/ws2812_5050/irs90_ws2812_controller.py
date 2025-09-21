@@ -3,6 +3,8 @@ import time
 import board
 import neopixel
 import os
+import signal
+import sys
 
 # ------------------------------
 # WS2812 LED 設定
@@ -31,7 +33,7 @@ SENSOR_MAP = {
 # 顏色設定
 COLOR_ON = (255, 0, 0)   # 感測到物體時紅燈
 COLOR_OFF = (0, 255, 0)  # 初始與未偵測 → 綠燈
-COLOR_EXIT = (0, 0, 0)   # Ctrl+C 結束 → 全關
+COLOR_EXIT = (0, 0, 0)   # 程式結束 → 全關
 
 # ------------------------------
 # 讀取 IRS90 感測器
@@ -63,10 +65,24 @@ def update_leds(sensor_status):
     pixels.show()
 
 # ------------------------------
+# 安全關燈函式
+# ------------------------------
+def safe_exit(signum=None, frame=None):
+    print(f"Received signal {signum}, turning off LEDs...")
+    pixels.fill(COLOR_EXIT)
+    pixels.show()
+    sys.exit(0)
+
+# ------------------------------
 # 主程式
 # ------------------------------
 def main():
     print("IRS90 -> WS2812 Controller started")
+
+    # 設置信號處理器
+    signal.signal(signal.SIGINT, safe_exit)   # Ctrl+C
+    signal.signal(signal.SIGTERM, safe_exit)  # kill
+
     # 啟動時顯示綠燈
     pixels.fill(COLOR_OFF)
     pixels.show()
@@ -77,10 +93,7 @@ def main():
             update_leds(status)
             time.sleep(0.1)
     except KeyboardInterrupt:
-        # Ctrl+C 結束時 LED 全關
-        pixels.fill(COLOR_EXIT)
-        pixels.show()
-        print("Exiting...")
+        safe_exit()
 
 # ------------------------------
 if __name__ == "__main__":
