@@ -12,6 +12,7 @@
   * Kernel 驅動穩定管理感測器、LED 與 UART
   * User-space 程式讀取感測器、控制 LED、發送資料
   * Python 控制 WS2812 LED，可背景執行並支援 log
+  * pptx: https://docs.google.com/presentation/d/1WiRNUzjZaT-H-pkTQES2LoDNdEh6kiOz/edit?usp=sharing&ouid=107129721443512939476&rtpof=true&sd=true
 
 ---
 
