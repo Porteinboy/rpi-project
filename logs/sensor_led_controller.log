@@ -6,11 +6,5 @@ Device initialization successful:
   - IRS-90 sensor: /dev/irs90_all
   - LED controller: /dev/led_all (fd=3)
 Initial state: All LEDs off
-[16:21:16] Sensor: 000 -> LED: 000
-[16:21:17] Sensor: 111 -> LED: 111
-[16:21:18] Sensor: 110 -> LED: 110
-[16:21:18] Sensor: 100 -> LED: 100
-[16:21:18] Sensor: 000 -> LED: 000
-
-Received signal 2, exiting...
-Devices closed, LEDs turned off
+[10:29:44] Sensor: 111 -> LED: 111
+...........

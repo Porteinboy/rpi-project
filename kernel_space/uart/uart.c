@@ -1,8 +1,3 @@
-/*
- *  uart driver exercise code copyright is owned by the authors
- *  author: jiunnder2000@yahoo.com.tw
- */
-
 // uart.c
 #include <linux/version.h>
 #include <linux/module.h>
@@ -83,7 +78,6 @@ static ssize_t uart_read (struct file * filp, char *buf, size_t count, loff_t *t
     uint32_t status;
     unsigned char kbuf;
 
-    // To do: read data from uart2 and copy to user space
     status = readl(uart_FR[dev_minor]);
 
     //if ( !(status & UART_FR_RXFE) )
@@ -114,10 +108,8 @@ static ssize_t uart_write (struct file * filp, const char *buf, size_t count, lo
     
     while( i < count ) {
       status = readl(uart_FR[dev_minor]);
-      // To do: Wait for until transmit holding register empty
       if( status & UART_FR_TXFE ) {
         // printk(KERN_ALERT "uart_write[%d](): status:%x, kbuf[0]:%x\n", dev_minor, status, kbuf[0]);
-	// To do: Write to UART transmit holding register
         writeb(*(kbuf+i), uart_DR[dev_minor]);
 	
 	while ( readl(uart_FR[dev_minor]) & UART_FR_BUSY);
@@ -145,7 +137,6 @@ static int __init uart_init(void)
     struct resource *uart_region[2];
 
     printk(KERN_ALERT "uart: INIT_MOD\n");
-    // To do: request the IO port region
     for (i=0; i<UARTS_NUM; i++) {
 	    uart_region[i] = request_mem_region(uart_port_base[i], UART_REGLEN, uart_name[i]);
 	    if ( ! uart_region[i] ) {
@@ -211,7 +202,6 @@ static int __init uart_init(void)
         uart_LCRH[i] = (uart_base[i] + LCRH/4);
         uart_CR[i] = (uart_base[i] + CR/4);
 
-    	/* To do: Enable UART, Enable Receive, Enable Transmit */
 	writel(CR_UARTEN | CR_RXE | CR_TXE , uart_CR[i]);
 
         /* Reference: bcm2711-peripherals.pdf p.151.
@@ -227,11 +217,9 @@ static int __init uart_init(void)
          * where FUARTCLK is the UART reference clock frequency
          * BAUDDIV: comprised of the IBRD (integer) and the FBRD (fraction)
          */
-        /* To do: set the baud: 115200 */
         writel(26, uart_IBRD[i]);
         writel(3, uart_FBRD[i]);
 
-	/* To do: Bits 8, FIFO disable, Stop 1, parity check disable */
         writel(LCRH_WLEN_8BITS , uart_LCRH[i]);
     }
     
@@ -258,7 +246,6 @@ static void __exit uart_exit(void)
 {
     int i;
 
-    /* To do: Disable UART, disable Receive, disable Transmit */
     writel(orig_fn ,gpio_GPFSEL0);
     iounmap(gpio_base);
     for(i=0; i<UARTS_NUM; i++)
@@ -271,7 +258,6 @@ static void __exit uart_exit(void)
     unregister_chrdev(uart_major, "uart");
 #endif
 
-    // To do: release the IO port region
     for(i=0; i<UARTS_NUM; i++)
         release_mem_region(uart_port_base[i], UART_REGLEN);
 }
