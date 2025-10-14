@@ -1,0 +1,37 @@
+* [33m15807f4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;32mbackup-local[m[33m)[m backup to github
+[31m|[m * [33mef6c8f1[m[33m ([m[1;31morigin/main[m[33m)[m Delete src/ws2812_5050 directory
+[31m|[m * [33me622067[m Update README.md
+[31m|[m[31m/[m  
+* [33m4098d42[m Update README.md
+* [33ma189d50[m update Load Unload
+* [33m3d0dcd0[m update turn off light
+* [33mb59458a[m update turn off light
+* [33meb1cb18[m Python-based IRS90 and WS2812_5050 Control Update
+* [33mee016b0[m Update Boot-time Background Service Configuration
+* [33m90f5bb7[m update En Project Title
+* [33m964f531[m Update README.md
+* [33m37442b1[m Update README.md
+* [33mf4ed189[m Update IRS90_UART source code
+* [33mf078249[m Update auto-loading of all drivers to kernel at boot time
+* [33m156fda6[m update output dir: bin
+* [33m05427f1[m update file name and README.md
+* [33mefa8c5a[m update user_space IRS90 UART code
+* [33m33e699f[m update user_space IRS90 UART code
+* [33mf3e4d38[m Update README.md
+* [33m86448ef[m Configure automatic loading of IRS90, LED, and UART kernel drivers at system startup and create corresponding UART device nodes
+* [33mcff6e62[m Configure automatic loading of IRS90, LED, and UART kernel drivers at system startup and create corresponding UART device nodes
+* [33m4a34ba6[m update UART kernel driver
+* [33m88ad1ac[m (On going)update UART
+* [33m14e8d27[m update MQTT
+* [33m71669b7[m update README.md
+* [33ma44efc2[m update README.md
+* [33m8fef86d[m update README.md
+* [33m17e00b6[m update README.md
+* [33m0994273[m update README.md
+* [33me31871a[m update README.md
+* [33m2438e92[m update A complete systemd service version that can automatically execute your device_load.sh at boot on the RPi4 (BCM2711).
+* [33me53d345[m update IRS90 RPI4 GPIO 16 to 12
+* [33m82b6eb8[m update sensor_led_controller.c
+* [33m7681f9d[m update 可以重複讀取IRS90
+* [33m1a21549[m Refactor: Rename irs-90 to irs_90 and add LED driver
+* [33ma30ce74[m first commit
